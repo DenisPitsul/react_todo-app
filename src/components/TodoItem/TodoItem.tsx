@@ -2,7 +2,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import cn from 'classnames';
 import { Todo } from '../../types/todo/Todo';
-import { useTodoContext } from '../../store/useTodoContext';
 
 const TODO_DIV_CLASSNAME = 'todo';
 const TODO_REMOVE_BUTTON_CLASSNAME = 'todo__remove';
@@ -10,10 +9,18 @@ const TODO_STATUS_CHECKBOX_CLASSNAME = 'todo__status';
 
 type Props = {
   todo: Todo;
+  onTodoDelete: (todoId: Todo['id']) => void;
+  onTodoUpdate: (
+    todoId: Todo['id'],
+    todoDataToUpdate: Partial<Pick<Todo, 'title' | 'completed'>>,
+  ) => void;
 };
 
-export const TodoItem: React.FC<Props> = ({ todo }) => {
-  const { onTodoUpdate, onTodoDelete } = useTodoContext();
+export const TodoItem: React.FC<Props> = ({
+  todo,
+  onTodoDelete,
+  onTodoUpdate,
+}) => {
   const [isEditingTitleFormOpened, setIsEditingTitleFormOpened] =
     useState(false);
   const [editingTitle, setEditingTitle] = useState(todo.title);

@@ -54,7 +54,10 @@ export const useTodoController = () => {
   }, []);
 
   const onTodoUpdate = useCallback(
-    (todoId: Todo['id'], todoDataToUpdate: Partial<Todo>) => {
+    (
+      todoId: Todo['id'],
+      todoDataToUpdate: Partial<Pick<Todo, 'title' | 'completed'>>,
+    ) => {
       setTodos(current => {
         return current.map(todo => {
           if (todo.id === todoId) {

@@ -5,12 +5,17 @@ import { useTodoContext } from '../../store/useTodoContext';
 type Props = {};
 
 export const TodoList: React.FC<Props> = () => {
-  const { filteredTodos } = useTodoContext();
+  const { filteredTodos, onTodoDelete, onTodoUpdate } = useTodoContext();
 
   return (
     <section className="todoapp__main" data-cy="TodoList">
       {filteredTodos.map(todo => (
-        <TodoItem key={todo.id} todo={todo} />
+        <TodoItem
+          key={todo.id}
+          todo={todo}
+          onTodoDelete={onTodoDelete}
+          onTodoUpdate={onTodoUpdate}
+        />
       ))}
     </section>
   );
