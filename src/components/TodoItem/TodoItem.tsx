@@ -3,15 +3,11 @@ import React, { useEffect, useRef, useState } from 'react';
 import cn from 'classnames';
 import { Todo } from '../../types/todo/Todo';
 
-const TODO_DIV_CLASSNAME = 'todo';
-const TODO_REMOVE_BUTTON_CLASSNAME = 'todo__remove';
-const TODO_STATUS_CHECKBOX_CLASSNAME = 'todo__status';
-
 type Props = {
   todo: Todo;
-  onTodoDelete: (todoId: Todo['id']) => void;
+  onTodoDelete: (todoId: number) => void;
   onTodoUpdate: (
-    todoId: Todo['id'],
+    todoId: number,
     todoDataToUpdate: Partial<Pick<Todo, 'title' | 'completed'>>,
   ) => void;
 };
@@ -38,27 +34,6 @@ export const TodoItem: React.FC<Props> = ({
 
   const handleDeleteTodo = () => {
     onTodoDelete(todo.id);
-  };
-
-  const handleDoubleClickOnTodo = (
-    event: React.MouseEvent<HTMLDivElement, MouseEvent>,
-  ) => {
-    const target = event.target as HTMLElement;
-
-    const isClickOnDeleteButton = target.closest(
-      `.${TODO_REMOVE_BUTTON_CLASSNAME}`,
-    );
-    const isClickOnCheckbox = target.closest(
-      `.${TODO_STATUS_CHECKBOX_CLASSNAME}`,
-    );
-
-    const isClickOnTodoDiv = (
-      event.currentTarget as HTMLElement
-    ).classList.contains(TODO_DIV_CLASSNAME);
-
-    if (!isClickOnDeleteButton && !isClickOnCheckbox && isClickOnTodoDiv) {
-      setIsEditingTitleFormOpened(true);
-    }
   };
 
   const handleUpdateTodoOrDeleteIfEditingTextIsEmpty = (
@@ -95,14 +70,14 @@ export const TodoItem: React.FC<Props> = ({
   return (
     <div
       data-cy="Todo"
-      className={cn(TODO_DIV_CLASSNAME, { completed: todo.completed })}
-      onDoubleClick={handleDoubleClickOnTodo}
+      className={cn('todo', { completed: todo.completed })}
+      onDoubleClick={() => setIsEditingTitleFormOpened(true)}
     >
       <label className="todo__status-label">
         <input
           data-cy="TodoStatus"
           type="checkbox"
-          className={TODO_STATUS_CHECKBOX_CLASSNAME}
+          className={'todo__status'}
           checked={todo.completed}
           onChange={handleChangeTodoStatus}
         />
@@ -134,7 +109,7 @@ export const TodoItem: React.FC<Props> = ({
 
           <button
             type="button"
-            className={TODO_REMOVE_BUTTON_CLASSNAME}
+            className={'todo__remove'}
             data-cy="TodoDelete"
             onClick={handleDeleteTodo}
           >

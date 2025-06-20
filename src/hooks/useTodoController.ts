@@ -38,13 +38,13 @@ export const useTodoController = () => {
     setTodos(current => [...current, todoToCreate]);
   }, []);
 
-  const onTodoDelete = useCallback((todoId: Todo['id']) => {
+  const onTodoDelete = useCallback((todoId: number) => {
     setTodos(current => current.filter(todo => todo.id !== todoId));
   }, []);
 
   const onTodoUpdate = useCallback(
     (
-      todoId: Todo['id'],
+      todoId: number,
       todoDataToUpdate: Partial<Pick<Todo, 'title' | 'completed'>>,
     ) => {
       setTodos(current => {

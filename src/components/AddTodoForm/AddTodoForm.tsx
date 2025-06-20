@@ -17,7 +17,7 @@ export const AddTodoForm: React.FC<Props> = () => {
 
     const trimmedTodoTitle = todoTitle.trim();
 
-    if (trimmedTodoTitle === '') {
+    if (!trimmedTodoTitle.length) {
       return;
     }
 
