@@ -21,9 +21,7 @@ export const useTodoController = () => {
     saveToLocalStorage<Todo[]>(TODOS_KEY, todos);
   }, [todos]);
 
-  const filteredTodos = useMemo(() => {
-    return getFilteredTodos(todos, statusFilter);
-  }, [todos, statusFilter]);
+  const filteredTodos = getFilteredTodos(todos, statusFilter);
 
   const isThereAlLeastOneTodo = todos.length > 0;
   const isAllTodosCompleted = todos.every(todo => todo.completed);
