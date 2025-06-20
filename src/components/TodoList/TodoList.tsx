@@ -1,6 +1,6 @@
 import React from 'react';
 import { TodoItem } from '../TodoItem';
-import { useTodoContext } from '../../context/useTodoContext';
+import { useTodoContext } from '../../store/useTodoContext';
 
 type Props = {};
 

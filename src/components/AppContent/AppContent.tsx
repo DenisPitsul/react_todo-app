@@ -1,4 +1,4 @@
-import { useTodoContext } from '../../context/useTodoContext';
+import { useTodoContext } from '../../store/useTodoContext';
 import { Footer } from '../Footer';
 import { Header } from '../Header';
 import { TodoList } from '../TodoList';

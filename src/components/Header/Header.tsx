@@ -1,7 +1,7 @@
 import React from 'react';
 import { AddTodoForm } from '../AddTodoForm';
 import cn from 'classnames';
-import { useTodoContext } from '../../context/useTodoContext';
+import { useTodoContext } from '../../store/useTodoContext';
 
 type Props = {};
 

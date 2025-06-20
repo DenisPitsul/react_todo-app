@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React, { createContext, memo, useContext } from 'react';
-import { useTodoController } from '../hooks/useTodoController';
+import { createContext, useContext } from 'react';
 import { Todo } from '../types/todo/Todo';
 import { StatusFilter } from '../enums/statusFilter';
 
@@ -22,7 +21,7 @@ type TodoContextType = {
   isThereAtLeastOneCompletedTodo: boolean;
 };
 
-const TodoContext = createContext<TodoContextType>({
+export const TodoContext = createContext<TodoContextType>({
   todos: [],
   isThereAlLeastOneTodo: false,
   isAllTodosCompleted: false,
@@ -39,14 +38,3 @@ const TodoContext = createContext<TodoContextType>({
 });
 
 export const useTodoContext = () => useContext(TodoContext);
-
-type Props = {
-  children: React.ReactNode;
-};
-
-// eslint-disable-next-line react/display-name
-export const TodoContextProvider: React.FC<Props> = memo(({ children }) => {
-  const value = useTodoController();
-
-  return <TodoContext.Provider value={value}>{children}</TodoContext.Provider>;
-});

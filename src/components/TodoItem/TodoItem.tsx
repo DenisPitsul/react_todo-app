@@ -2,7 +2,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import cn from 'classnames';
 import { Todo } from '../../types/todo/Todo';
-import { useTodoContext } from '../../context/useTodoContext';
+import { useTodoContext } from '../../store/useTodoContext';
 
 const TODO_DIV_CLASSNAME = 'todo';
 const TODO_REMOVE_BUTTON_CLASSNAME = 'todo__remove';

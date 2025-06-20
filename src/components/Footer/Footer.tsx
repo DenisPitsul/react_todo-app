@@ -1,7 +1,7 @@
 import React from 'react';
 import cn from 'classnames';
 import { StatusFilter } from '../../enums/statusFilter';
-import { useTodoContext } from '../../context/useTodoContext';
+import { useTodoContext } from '../../store/useTodoContext';
 
 type Props = {};
 
