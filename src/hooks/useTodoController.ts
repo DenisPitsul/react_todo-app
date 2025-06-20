@@ -25,19 +25,10 @@ export const useTodoController = () => {
     return getFilteredTodos(todos, statusFilter);
   }, [todos, statusFilter]);
 
-  const {
-    isThereAlLeastOneTodo,
-    isAllTodosCompleted,
-    activeTodosCount,
-    isThereAtLeastOneCompletedTodo,
-  } = useMemo(() => {
-    return {
-      isThereAlLeastOneTodo: !!todos.length,
-      isAllTodosCompleted: todos.every(todo => todo.completed),
-      activeTodosCount: todos.filter(todo => !todo.completed).length,
-      isThereAtLeastOneCompletedTodo: todos.some(todo => todo.completed),
-    };
-  }, [todos]);
+  const isThereAlLeastOneTodo = todos.length > 0;
+  const isAllTodosCompleted = todos.every(todo => todo.completed);
+  const activeTodosCount = todos.filter(todo => !todo.completed).length;
+  const isThereAtLeastOneCompletedTodo = todos.some(todo => todo.completed);
 
   const onAddTodo = useCallback((todoTitle: string) => {
     const todoToCreate: Todo = {
@@ -94,19 +85,36 @@ export const useTodoController = () => {
     });
   }, [isAllTodosCompleted, onTodoUpdate, todos]);
 
-  return {
-    todos,
-    isThereAlLeastOneTodo,
-    isAllTodosCompleted,
-    onAddTodo,
-    onTodoDelete,
-    onClearCompletedTodos,
-    onTodoUpdate,
-    onToggleTodos,
-    statusFilter,
-    setStatusFilter,
-    filteredTodos,
-    activeTodosCount,
-    isThereAtLeastOneCompletedTodo,
-  };
+  return useMemo(
+    () => ({
+      todos,
+      isThereAlLeastOneTodo,
+      isAllTodosCompleted,
+      onAddTodo,
+      onTodoDelete,
+      onClearCompletedTodos,
+      onTodoUpdate,
+      onToggleTodos,
+      statusFilter,
+      setStatusFilter,
+      filteredTodos,
+      activeTodosCount,
+      isThereAtLeastOneCompletedTodo,
+    }),
+    [
+      todos,
+      isThereAlLeastOneTodo,
+      isAllTodosCompleted,
+      onAddTodo,
+      onTodoDelete,
+      onClearCompletedTodos,
+      onTodoUpdate,
+      onToggleTodos,
+      statusFilter,
+      setStatusFilter,
+      filteredTodos,
+      activeTodosCount,
+      isThereAtLeastOneCompletedTodo,
+    ],
+  );
 };
